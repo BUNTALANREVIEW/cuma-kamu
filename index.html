@@ -1,0 +1,461 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Maaf ya</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      min-height: 100vh;
+      overflow: hidden;
+      font-family: Inter, system-ui, sans-serif;
+      color: #221522;
+      background: linear-gradient(135deg, #fff7fb 0%, #f7ecff 50%, #edf9ff 100%);
+    }
+
+    .scene {
+      position: relative;
+      width: 100vw;
+      height: 100vh;
+      overflow: hidden;
+    }
+
+    .intro {
+      position: fixed;
+      top: 28px;
+      left: 28px;
+      z-index: 20;
+      max-width: 430px;
+    }
+
+    .label {
+      margin-bottom: 10px;
+      color: rgba(34, 21, 34, 0.48);
+      font-size: 13px;
+      font-weight: 800;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+    }
+
+    h1 {
+      margin-bottom: 12px;
+      font-size: clamp(42px, 7vw, 86px);
+      line-height: 0.92;
+      letter-spacing: -0.075em;
+      font-weight: 800;
+    }
+
+    .intro p {
+      color: rgba(34, 21, 34, 0.62);
+      font-size: 16px;
+      line-height: 1.65;
+      font-weight: 500;
+    }
+
+    button {
+      margin-top: 22px;
+      border: 1px solid rgba(34, 21, 34, 0.12);
+      cursor: pointer;
+      border-radius: 999px;
+      padding: 12px 18px;
+      color: #221522;
+      background: rgba(255, 255, 255, 0.58);
+      backdrop-filter: blur(14px);
+      font: inherit;
+      font-size: 14px;
+      font-weight: 700;
+      transition: 0.2s ease;
+    }
+
+    button:hover {
+      transform: translateY(-2px);
+      background: rgba(255, 255, 255, 0.8);
+    }
+
+    .progress {
+      position: fixed;
+      left: 28px;
+      bottom: 24px;
+      z-index: 20;
+      color: rgba(34, 21, 34, 0.54);
+      font-size: 13px;
+      font-weight: 700;
+    }
+
+    .message {
+      position: fixed;
+      z-index: 40;
+      width: min(440px, 84vw);
+      padding: 16px 18px;
+      border-radius: 22px;
+      color: #221522;
+      background: rgba(255, 255, 255, 0.82);
+      border: 1px solid rgba(34, 21, 34, 0.08);
+      box-shadow: 0 20px 50px rgba(34, 21, 34, 0.12);
+      backdrop-filter: blur(16px);
+      font-size: clamp(15px, 2.8vw, 19px);
+      line-height: 1.55;
+      font-weight: 700;
+      text-align: center;
+      pointer-events: none;
+      animation: messageOut 3.2s ease forwards;
+    }
+
+    @keyframes messageOut {
+      0% { opacity: 0; transform: translate(-50%, -35%) scale(0.94); }
+      15% { opacity: 1; transform: translate(-50%, -70%) scale(1); }
+      78% { opacity: 1; transform: translate(-50%, -105%) scale(1); }
+      100% { opacity: 0; transform: translate(-50%, -145%) scale(0.96); }
+    }
+
+    .final {
+      position: fixed;
+      inset: 0;
+      z-index: 50;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      padding: 22px;
+      background: rgba(255, 247, 251, 0.62);
+      backdrop-filter: blur(8px);
+      pointer-events: none;
+    }
+
+    .final.show {
+      display: flex;
+      animation: fade 0.35s ease both;
+    }
+
+    .final-content {
+      width: min(560px, 90vw);
+      padding: 34px;
+      border-radius: 28px;
+      background: rgba(255, 255, 255, 0.86);
+      box-shadow: 0 26px 70px rgba(34, 21, 34, 0.14);
+      text-align: center;
+    }
+
+    .final-content h2 {
+      margin-bottom: 12px;
+      font-size: clamp(36px, 7vw, 70px);
+      line-height: 0.95;
+      letter-spacing: -0.075em;
+    }
+
+    .final-content p {
+      color: rgba(34, 21, 34, 0.66);
+      font-size: 17px;
+      line-height: 1.7;
+      font-weight: 700;
+    }
+
+    @keyframes fade {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+
+    .heart {
+      position: fixed;
+      z-index: 60;
+      color: rgba(217, 70, 143, 0.62);
+      font-size: 18px;
+      pointer-events: none;
+      animation: heartOut 2.2s ease forwards;
+    }
+
+    @keyframes heartOut {
+      from { opacity: 1; transform: translateY(0) scale(0.7); }
+      to { opacity: 0; transform: translateY(-120px) scale(1.4); }
+    }
+
+    .butterfly {
+      position: absolute;
+      left: var(--x);
+      top: var(--y);
+      width: var(--size);
+      height: var(--size);
+      z-index: 10;
+      cursor: pointer;
+      filter: drop-shadow(0 12px 20px rgba(34, 21, 34, 0.14));
+      animation: fly var(--duration) ease-in-out infinite;
+    }
+
+    .butterfly:hover {
+      filter: drop-shadow(0 0 20px rgba(255, 255, 255, 0.95)) drop-shadow(0 14px 22px rgba(34, 21, 34, 0.16));
+    }
+
+    .butterfly-inner {
+      position: relative;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      animation: bob 0.7s ease-in-out infinite alternate;
+    }
+
+    .body {
+      position: absolute;
+      left: 50%;
+      top: 25%;
+      width: 7%;
+      height: 46%;
+      border-radius: 999px;
+      background: rgba(34, 21, 34, 0.45);
+      transform: translateX(-50%);
+      z-index: 3;
+    }
+
+    .wing {
+      position: absolute;
+      top: 9%;
+      width: 48%;
+      height: 70%;
+      background: linear-gradient(135deg, rgba(255,255,255,0.98), rgba(255,255,255,0.64));
+      border: 1px solid rgba(255,255,255,0.9);
+      box-shadow: inset 0 0 18px rgba(255,255,255,0.8);
+      z-index: 2;
+    }
+
+    .wing.left {
+      right: 50%;
+      border-radius: 78% 28% 72% 35%;
+      transform-origin: right center;
+      animation: flapLeft 0.3s ease-in-out infinite alternate;
+    }
+
+    .wing.right {
+      left: 50%;
+      border-radius: 28% 78% 35% 72%;
+      transform-origin: left center;
+      animation: flapRight 0.3s ease-in-out infinite alternate;
+    }
+
+    @keyframes flapLeft {
+      from { transform: rotateY(16deg) rotateZ(-7deg); }
+      to { transform: rotateY(72deg) rotateZ(7deg); }
+    }
+
+    @keyframes flapRight {
+      from { transform: rotateY(-16deg) rotateZ(7deg); }
+      to { transform: rotateY(-72deg) rotateZ(-7deg); }
+    }
+
+    @keyframes bob {
+      from { transform: translateY(-3px) rotate(-2deg); }
+      to { transform: translateY(3px) rotate(3deg); }
+    }
+
+    @keyframes fly {
+      0% { transform: translate(0, 0) rotate(0deg); }
+      25% { transform: translate(var(--x1), var(--y1)) rotate(var(--r1)); }
+      50% { transform: translate(var(--x2), var(--y2)) rotate(var(--r2)); }
+      75% { transform: translate(var(--x3), var(--y3)) rotate(var(--r3)); }
+      100% { transform: translate(0, 0) rotate(0deg); }
+    }
+
+    .b1 { --size: 130px; --x: 8vw; --y: 34vh; --duration: 15s; --x1: 18vw; --y1: -14vh; --x2: 46vw; --y2: 8vh; --x3: 24vw; --y3: 20vh; --r1: 18deg; --r2: -24deg; --r3: 20deg; }
+    .b2 { --size: 105px; --x: 74vw; --y: 23vh; --duration: 18s; --x1: -18vw; --y1: 16vh; --x2: -44vw; --y2: -4vh; --x3: -16vw; --y3: 22vh; --r1: -22deg; --r2: 18deg; --r3: -18deg; }
+    .b3 { --size: 145px; --x: 48vw; --y: 58vh; --duration: 20s; --x1: 20vw; --y1: -18vh; --x2: -12vw; --y2: -32vh; --x3: -34vw; --y3: 2vh; --r1: 26deg; --r2: -18deg; --r3: 24deg; }
+    .b4 { --size: 100px; --x: 22vw; --y: 18vh; --duration: 13s; --x1: 18vw; --y1: 18vh; --x2: 40vw; --y2: 4vh; --x3: 28vw; --y3: 30vh; --r1: 18deg; --r2: -20deg; --r3: 25deg; }
+    .b5 { --size: 118px; --x: 84vw; --y: 64vh; --duration: 17s; --x1: -24vw; --y1: -18vh; --x2: -58vw; --y2: -2vh; --x3: -32vw; --y3: -32vh; --r1: -18deg; --r2: 24deg; --r3: -24deg; }
+
+    @media (max-width: 720px) {
+      .intro {
+        top: 22px;
+        left: 18px;
+        right: 18px;
+        max-width: none;
+      }
+
+      .intro p {
+        max-width: 330px;
+      }
+
+      .progress {
+        left: 18px;
+        bottom: 18px;
+      }
+
+      .butterfly {
+        width: calc(var(--size) * 0.76);
+        height: calc(var(--size) * 0.76);
+      }
+    }
+  </style>
+</head>
+<body>
+  <!-- Taruh file musik kamu satu folder dengan HTML ini, lalu ganti src sesuai nama filenya. Contoh: lagu.mp3 -->
+  <audio id="bgMusic" src="lagu.mp3" preload="auto" loop></audio>
+
+  <main class="scene" id="scene">
+    <section class="intro">
+      <div class="label">untuk kamu</div>
+      <h1>maaf ya.</h1>
+      <p>Tekan kupu-kupu putihnya. Pesan dan lagu akan mulai pelan-pelan dari sana.</p>
+      <button id="addBtn">Tambah kupu-kupu</button>
+    </section>
+
+    <div class="butterfly b1"><div class="butterfly-inner"><span class="wing left"></span><span class="wing right"></span><span class="body"></span></div></div>
+    <div class="butterfly b2"><div class="butterfly-inner"><span class="wing left"></span><span class="wing right"></span><span class="body"></span></div></div>
+    <div class="butterfly b3"><div class="butterfly-inner"><span class="wing left"></span><span class="wing right"></span><span class="body"></span></div></div>
+    <div class="butterfly b4"><div class="butterfly-inner"><span class="wing left"></span><span class="wing right"></span><span class="body"></span></div></div>
+    <div class="butterfly b5"><div class="butterfly-inner"><span class="wing left"></span><span class="wing right"></span><span class="body"></span></div></div>
+  </main>
+
+  <div class="progress" id="progress">0 / 8 pesan</div>
+
+  <div class="final" id="final">
+    <div class="final-content">
+      <h2>cuma kamu.</h2>
+      <p>Aku nggak memilih masa lalu. Aku memilih kamu. Maaf kalau caraku menjelaskan bikin kamu sakit hati.</p>
+    </div>
+  </div>
+
+  <script>
+    const scene = document.getElementById("scene");
+    const addBtn = document.getElementById("addBtn");
+    const progress = document.getElementById("progress");
+    const final = document.getElementById("final");
+    const bgMusic = document.getElementById("bgMusic");
+
+    let musicStarted = false;
+
+    function playMusic() {
+      if (musicStarted) return;
+      musicStarted = true;
+      bgMusic.volume = 0;
+      bgMusic.play().then(() => {
+        const fade = setInterval(() => {
+          if (bgMusic.volume < 0.45) {
+            bgMusic.volume = Math.min(bgMusic.volume + 0.05, 0.45);
+          } else {
+            clearInterval(fade);
+          }
+        }, 160);
+      }).catch(() => {
+        musicStarted = false;
+      });
+    }
+
+    const messages = [
+      "Maaf kalau omonganku bikin kamu overthinking.",
+      "Aku bukan gamon. Aku cuma salah cara jelasin.",
+      "Aku cerita bukan karena masih berharap sama masa lalu.",
+      "Aku cuma pengen kamu ngerti biar nggak salah paham.",
+      "Fokusku sekarang cuma kamu.",
+      "Nggak ada yang bisa ngalahin kamu di hati aku.",
+      "Aku nggak mau kehilangan kamu.",
+      "Maafin aku ya. Aku sayang kamu, cuma kamu."
+    ];
+
+    const extraMessages = [
+      "Cuma kamu.",
+      "Aku pilih kamu.",
+      "Maafin aku ya.",
+      "Aku sayang kamu."
+    ];
+
+    let opened = 0;
+
+    function showMessage(x, y, text) {
+      const el = document.createElement("div");
+      el.className = "message";
+      el.textContent = text;
+      el.style.left = x + "px";
+      el.style.top = y + "px";
+      document.body.appendChild(el);
+      setTimeout(() => el.remove(), 3200);
+    }
+
+    function showHearts(x, y) {
+      for (let i = 0; i < 5; i++) {
+        setTimeout(() => {
+          const heart = document.createElement("div");
+          heart.className = "heart";
+          heart.textContent = "♥";
+          heart.style.left = (x + Math.random() * 70 - 35) + "px";
+          heart.style.top = (y + Math.random() * 24 - 12) + "px";
+          document.body.appendChild(heart);
+          setTimeout(() => heart.remove(), 2200);
+        }, i * 90);
+      }
+    }
+
+    function butterflyClick(event) {
+      event.stopPropagation();
+      playMusic();
+
+      const text = opened < messages.length
+        ? messages[opened]
+        : extraMessages[Math.floor(Math.random() * extraMessages.length)];
+
+      showMessage(event.clientX, event.clientY, text);
+      showHearts(event.clientX, event.clientY);
+
+      if (opened < messages.length) {
+        opened++;
+        progress.textContent = `${opened} / ${messages.length} pesan`;
+      }
+
+      if (opened === messages.length) {
+        setTimeout(() => {
+          final.classList.add("show");
+          setTimeout(() => final.classList.remove("show"), 4200);
+        }, 400);
+      }
+    }
+
+    function attachButterfly(el) {
+      el.addEventListener("click", butterflyClick);
+    }
+
+    function createButterfly(x, y) {
+      const b = document.createElement("div");
+      b.className = "butterfly";
+      const size = Math.floor(Math.random() * 45) + 100;
+
+      b.style.setProperty("--size", size + "px");
+      b.style.setProperty("--x", x ? x + "px" : Math.floor(Math.random() * 84 + 4) + "vw");
+      b.style.setProperty("--y", y ? y + "px" : Math.floor(Math.random() * 68 + 16) + "vh");
+      b.style.setProperty("--duration", Math.floor(Math.random() * 8 + 13) + "s");
+      b.style.setProperty("--x1", Math.floor(Math.random() * 36 - 18) + "vw");
+      b.style.setProperty("--y1", Math.floor(Math.random() * 36 - 22) + "vh");
+      b.style.setProperty("--x2", Math.floor(Math.random() * 70 - 35) + "vw");
+      b.style.setProperty("--y2", Math.floor(Math.random() * 56 - 28) + "vh");
+      b.style.setProperty("--x3", Math.floor(Math.random() * 64 - 32) + "vw");
+      b.style.setProperty("--y3", Math.floor(Math.random() * 52 - 26) + "vh");
+      b.style.setProperty("--r1", "20deg");
+      b.style.setProperty("--r2", "-24deg");
+      b.style.setProperty("--r3", "18deg");
+
+      b.innerHTML = `<div class="butterfly-inner"><span class="wing left"></span><span class="wing right"></span><span class="body"></span></div>`;
+      scene.appendChild(b);
+      attachButterfly(b);
+      setTimeout(() => b.remove(), 28000);
+    }
+
+    document.querySelectorAll(".butterfly").forEach(attachButterfly);
+
+    addBtn.addEventListener("click", (event) => {
+      event.stopPropagation();
+      for (let i = 0; i < 3; i++) {
+        setTimeout(() => createButterfly(), i * 180);
+      }
+    });
+
+    scene.addEventListener("click", (event) => {
+      if (event.target.closest("button") || event.target.closest(".butterfly")) return;
+      createButterfly(event.clientX, event.clientY);
+    });
+  </script>
+</body>
+</html>
