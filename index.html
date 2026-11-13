@@ -1,461 +1,283 @@
 <!DOCTYPE html>
 <html lang="id">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Maaf ya</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Undangan Pernikahan Akbar & Bunga</title>
+<meta property="og:title" content="Undangan Pernikahan Akbar & Bunga">
+<meta property="og:description" content="Kami mengundang Anda untuk hadir di hari bahagia kami.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400;1,600&family=Figtree:wght@400;500;600&family=Amiri&display=swap" rel="stylesheet">
+<style>
+:root{
+  --ink:#0d2a27; --ink2:#14403b; --gold:#c8a25a; --gold-soft:#e4cf9f;
+  --mist:#eef3ef; --text:#1c2f2c; --muted:#5d7571;
+  --serif:'Cormorant Garamond',Georgia,serif; --sans:'Figtree',system-ui,sans-serif;
+  --star:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='80' height='80' viewBox='0 0 80 80'%3E%3Cg fill='none' stroke='%23c8a25a' stroke-opacity='.28' stroke-width='1'%3E%3Crect x='20' y='20' width='40' height='40'/%3E%3Crect x='20' y='20' width='40' height='40' transform='rotate(45 40 40)'/%3E%3C/g%3E%3C/svg%3E");
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:var(--sans);color:var(--text);background:var(--mist);line-height:1.65;overflow-x:hidden}
+body.locked{overflow:hidden;height:100vh}
+h1,h2,h3{font-family:var(--serif);font-weight:600;line-height:1.1}
+section{padding:88px 24px;max-width:720px;margin:0 auto;text-align:center}
+h2{font-size:clamp(2rem,6vw,2.8rem);color:var(--ink);margin-bottom:12px}
+.lead{color:var(--muted);max-width:480px;margin:0 auto 36px}
+.dark{background:var(--ink) var(--star);color:#dfe9e4;max-width:none}
+.dark>.in{max-width:720px;margin:0 auto}
+.dark h2{color:#fff}.dark .lead{color:#a9bdb7}
+.arab{font-family:'Amiri',serif;font-size:clamp(1.6rem,6vw,2.2rem);color:var(--gold);direction:rtl}
 
-  <style>
-    * {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-    }
+/* Cover: two doors that part when the invitation is opened */
+#cover{position:fixed;inset:0;z-index:50;color:#fff;display:grid;place-items:center;text-align:center;transition:visibility 0s 1.4s}
+#cover .door{position:absolute;top:0;bottom:0;width:50%;background:var(--ink) var(--star);transition:transform 1.3s cubic-bezier(.7,0,.2,1)}
+#cover .l{left:0;border-right:1px solid rgba(200,162,90,.5)}
+#cover .r{right:0}
+#cover .c{position:relative;padding:24px;transition:opacity .5s}
+#cover .c p{color:var(--gold-soft)}
+#cover h1{font-size:clamp(3rem,14vw,6rem);font-style:italic;font-weight:400;margin:10px 0 18px}
+#cover h1 span{display:block;font-size:.4em;font-style:normal;color:var(--gold)}
+.guest{margin:22px auto;padding:12px 22px;border:1px solid rgba(200,162,90,.5);display:inline-block;min-width:220px}
+.guest small{display:block;color:#a9bdb7}
+.guest strong{font-family:var(--serif);font-size:1.5rem;font-weight:600}
+.btn{font:600 .95rem var(--sans);background:var(--gold);color:var(--ink);border:0;padding:13px 30px;border-radius:99px;cursor:pointer;transition:transform .2s,background .2s}
+.btn:hover{background:var(--gold-soft);transform:translateY(-2px)}
+.btn.ghost{background:transparent;border:1px solid var(--gold);color:var(--ink)}
+.dark .btn.ghost{color:var(--gold-soft)}
+#cover.open{visibility:hidden}
+#cover.open .c{opacity:0}
+#cover.open .l{transform:translateX(-101%)}
+#cover.open .r{transform:translateX(101%)}
+:focus-visible{outline:3px solid var(--gold);outline-offset:3px}
 
-    body {
-      min-height: 100vh;
-      overflow: hidden;
-      font-family: Inter, system-ui, sans-serif;
-      color: #221522;
-      background: linear-gradient(135deg, #fff7fb 0%, #f7ecff 50%, #edf9ff 100%);
-    }
+/* Hero */
+#hero{min-height:100vh;display:grid;place-items:center;max-width:none;background:var(--ink) var(--star);color:#fff}
+#hero .in{max-width:640px}
+#hero p{color:var(--gold-soft)}
+.names{font-size:clamp(3.4rem,16vw,7rem);font-style:italic;font-weight:400;margin:14px 0}
+.names i{display:block;font-size:.35em;color:var(--gold);font-style:normal}
+.cd{display:flex;gap:12px;justify-content:center;margin-top:36px}
+.cd div{min-width:68px;padding:12px 6px;border:1px solid rgba(200,162,90,.45);border-radius:10px}
+.cd b{display:block;font:600 1.8rem var(--serif)}
+.cd span{font-size:.75rem;color:#a9bdb7}
 
-    .scene {
-      position: relative;
-      width: 100vw;
-      height: 100vh;
-      overflow: hidden;
-    }
+/* Couple */
+.pair{display:grid;gap:36px;margin-top:40px}
+@media(min-width:640px){.pair{grid-template-columns:1fr 1fr}}
+.photo{width:180px;height:230px;margin:0 auto 18px;border-radius:90px 90px 8px 8px;background:linear-gradient(160deg,var(--ink2),var(--ink));border:2px solid var(--gold);display:grid;place-items:center;font:italic 4rem var(--serif);color:var(--gold);overflow:hidden}
+.photo img{width:100%;height:100%;object-fit:cover}
+.pair h3{font-size:1.9rem;color:var(--ink)}
+.pair p{color:var(--muted);font-size:.95rem}
 
-    .intro {
-      position: fixed;
-      top: 28px;
-      left: 28px;
-      z-index: 20;
-      max-width: 430px;
-    }
+/* Events */
+.ev{display:grid;gap:20px;margin-top:36px}
+@media(min-width:640px){.ev{grid-template-columns:1fr 1fr}}
+.card{border:1px solid rgba(200,162,90,.5);padding:32px 22px;border-radius:4px 4px 60px 4px}
+.card h3{font-size:2rem;color:var(--gold-soft);margin-bottom:8px}
+.card .d{font:600 1.15rem var(--sans);color:#fff}
+.card p{margin:6px 0;color:#c5d4cf}
+.card .btn{margin-top:14px;padding:10px 22px;font-size:.88rem;text-decoration:none;display:inline-block}
 
-    .label {
-      margin-bottom: 10px;
-      color: rgba(34, 21, 34, 0.48);
-      font-size: 13px;
-      font-weight: 800;
-      letter-spacing: 0.12em;
-      text-transform: uppercase;
-    }
+/* Gift */
+.gifts{display:grid;gap:16px;margin-top:28px}
+.gift{background:#fff;border-radius:6px;padding:22px;box-shadow:0 1px 0 rgba(13,42,39,.12);text-align:left;display:flex;justify-content:space-between;gap:12px;align-items:center;flex-wrap:wrap}
+.gift small{color:var(--muted)}
+.gift b{display:block;font:600 1.3rem var(--serif);letter-spacing:.04em}
 
-    h1 {
-      margin-bottom: 12px;
-      font-size: clamp(42px, 7vw, 86px);
-      line-height: 0.92;
-      letter-spacing: -0.075em;
-      font-weight: 800;
-    }
+/* RSVP */
+form{display:grid;gap:14px;text-align:left;margin-top:28px}
+label{font-weight:500;font-size:.9rem;display:grid;gap:6px}
+input,select,textarea{font:inherit;padding:12px 14px;border:1px solid #b9c8c3;border-radius:6px;background:#fff;color:var(--text);width:100%}
+textarea{min-height:100px;resize:vertical}
+.wishes{margin-top:40px;text-align:left;display:grid;gap:12px}
+.wish{background:#fff;border-left:3px solid var(--gold);padding:14px 18px;border-radius:0 6px 6px 0}
+.wish b{font-family:var(--serif);font-size:1.15rem}
+.wish small{color:var(--muted);margin-left:6px}
+footer{background:var(--ink);color:#a9bdb7;text-align:center;padding:56px 24px}
+footer h3{font:italic 400 2.4rem var(--serif);color:#fff;margin-bottom:8px}
 
-    .intro p {
-      color: rgba(34, 21, 34, 0.62);
-      font-size: 16px;
-      line-height: 1.65;
-      font-weight: 500;
-    }
-
-    button {
-      margin-top: 22px;
-      border: 1px solid rgba(34, 21, 34, 0.12);
-      cursor: pointer;
-      border-radius: 999px;
-      padding: 12px 18px;
-      color: #221522;
-      background: rgba(255, 255, 255, 0.58);
-      backdrop-filter: blur(14px);
-      font: inherit;
-      font-size: 14px;
-      font-weight: 700;
-      transition: 0.2s ease;
-    }
-
-    button:hover {
-      transform: translateY(-2px);
-      background: rgba(255, 255, 255, 0.8);
-    }
-
-    .progress {
-      position: fixed;
-      left: 28px;
-      bottom: 24px;
-      z-index: 20;
-      color: rgba(34, 21, 34, 0.54);
-      font-size: 13px;
-      font-weight: 700;
-    }
-
-    .message {
-      position: fixed;
-      z-index: 40;
-      width: min(440px, 84vw);
-      padding: 16px 18px;
-      border-radius: 22px;
-      color: #221522;
-      background: rgba(255, 255, 255, 0.82);
-      border: 1px solid rgba(34, 21, 34, 0.08);
-      box-shadow: 0 20px 50px rgba(34, 21, 34, 0.12);
-      backdrop-filter: blur(16px);
-      font-size: clamp(15px, 2.8vw, 19px);
-      line-height: 1.55;
-      font-weight: 700;
-      text-align: center;
-      pointer-events: none;
-      animation: messageOut 3.2s ease forwards;
-    }
-
-    @keyframes messageOut {
-      0% { opacity: 0; transform: translate(-50%, -35%) scale(0.94); }
-      15% { opacity: 1; transform: translate(-50%, -70%) scale(1); }
-      78% { opacity: 1; transform: translate(-50%, -105%) scale(1); }
-      100% { opacity: 0; transform: translate(-50%, -145%) scale(0.96); }
-    }
-
-    .final {
-      position: fixed;
-      inset: 0;
-      z-index: 50;
-      display: none;
-      align-items: center;
-      justify-content: center;
-      padding: 22px;
-      background: rgba(255, 247, 251, 0.62);
-      backdrop-filter: blur(8px);
-      pointer-events: none;
-    }
-
-    .final.show {
-      display: flex;
-      animation: fade 0.35s ease both;
-    }
-
-    .final-content {
-      width: min(560px, 90vw);
-      padding: 34px;
-      border-radius: 28px;
-      background: rgba(255, 255, 255, 0.86);
-      box-shadow: 0 26px 70px rgba(34, 21, 34, 0.14);
-      text-align: center;
-    }
-
-    .final-content h2 {
-      margin-bottom: 12px;
-      font-size: clamp(36px, 7vw, 70px);
-      line-height: 0.95;
-      letter-spacing: -0.075em;
-    }
-
-    .final-content p {
-      color: rgba(34, 21, 34, 0.66);
-      font-size: 17px;
-      line-height: 1.7;
-      font-weight: 700;
-    }
-
-    @keyframes fade {
-      from { opacity: 0; }
-      to { opacity: 1; }
-    }
-
-    .heart {
-      position: fixed;
-      z-index: 60;
-      color: rgba(217, 70, 143, 0.62);
-      font-size: 18px;
-      pointer-events: none;
-      animation: heartOut 2.2s ease forwards;
-    }
-
-    @keyframes heartOut {
-      from { opacity: 1; transform: translateY(0) scale(0.7); }
-      to { opacity: 0; transform: translateY(-120px) scale(1.4); }
-    }
-
-    .butterfly {
-      position: absolute;
-      left: var(--x);
-      top: var(--y);
-      width: var(--size);
-      height: var(--size);
-      z-index: 10;
-      cursor: pointer;
-      filter: drop-shadow(0 12px 20px rgba(34, 21, 34, 0.14));
-      animation: fly var(--duration) ease-in-out infinite;
-    }
-
-    .butterfly:hover {
-      filter: drop-shadow(0 0 20px rgba(255, 255, 255, 0.95)) drop-shadow(0 14px 22px rgba(34, 21, 34, 0.16));
-    }
-
-    .butterfly-inner {
-      position: relative;
-      width: 100%;
-      height: 100%;
-      pointer-events: none;
-      animation: bob 0.7s ease-in-out infinite alternate;
-    }
-
-    .body {
-      position: absolute;
-      left: 50%;
-      top: 25%;
-      width: 7%;
-      height: 46%;
-      border-radius: 999px;
-      background: rgba(34, 21, 34, 0.45);
-      transform: translateX(-50%);
-      z-index: 3;
-    }
-
-    .wing {
-      position: absolute;
-      top: 9%;
-      width: 48%;
-      height: 70%;
-      background: linear-gradient(135deg, rgba(255,255,255,0.98), rgba(255,255,255,0.64));
-      border: 1px solid rgba(255,255,255,0.9);
-      box-shadow: inset 0 0 18px rgba(255,255,255,0.8);
-      z-index: 2;
-    }
-
-    .wing.left {
-      right: 50%;
-      border-radius: 78% 28% 72% 35%;
-      transform-origin: right center;
-      animation: flapLeft 0.3s ease-in-out infinite alternate;
-    }
-
-    .wing.right {
-      left: 50%;
-      border-radius: 28% 78% 35% 72%;
-      transform-origin: left center;
-      animation: flapRight 0.3s ease-in-out infinite alternate;
-    }
-
-    @keyframes flapLeft {
-      from { transform: rotateY(16deg) rotateZ(-7deg); }
-      to { transform: rotateY(72deg) rotateZ(7deg); }
-    }
-
-    @keyframes flapRight {
-      from { transform: rotateY(-16deg) rotateZ(7deg); }
-      to { transform: rotateY(-72deg) rotateZ(-7deg); }
-    }
-
-    @keyframes bob {
-      from { transform: translateY(-3px) rotate(-2deg); }
-      to { transform: translateY(3px) rotate(3deg); }
-    }
-
-    @keyframes fly {
-      0% { transform: translate(0, 0) rotate(0deg); }
-      25% { transform: translate(var(--x1), var(--y1)) rotate(var(--r1)); }
-      50% { transform: translate(var(--x2), var(--y2)) rotate(var(--r2)); }
-      75% { transform: translate(var(--x3), var(--y3)) rotate(var(--r3)); }
-      100% { transform: translate(0, 0) rotate(0deg); }
-    }
-
-    .b1 { --size: 130px; --x: 8vw; --y: 34vh; --duration: 15s; --x1: 18vw; --y1: -14vh; --x2: 46vw; --y2: 8vh; --x3: 24vw; --y3: 20vh; --r1: 18deg; --r2: -24deg; --r3: 20deg; }
-    .b2 { --size: 105px; --x: 74vw; --y: 23vh; --duration: 18s; --x1: -18vw; --y1: 16vh; --x2: -44vw; --y2: -4vh; --x3: -16vw; --y3: 22vh; --r1: -22deg; --r2: 18deg; --r3: -18deg; }
-    .b3 { --size: 145px; --x: 48vw; --y: 58vh; --duration: 20s; --x1: 20vw; --y1: -18vh; --x2: -12vw; --y2: -32vh; --x3: -34vw; --y3: 2vh; --r1: 26deg; --r2: -18deg; --r3: 24deg; }
-    .b4 { --size: 100px; --x: 22vw; --y: 18vh; --duration: 13s; --x1: 18vw; --y1: 18vh; --x2: 40vw; --y2: 4vh; --x3: 28vw; --y3: 30vh; --r1: 18deg; --r2: -20deg; --r3: 25deg; }
-    .b5 { --size: 118px; --x: 84vw; --y: 64vh; --duration: 17s; --x1: -24vw; --y1: -18vh; --x2: -58vw; --y2: -2vh; --x3: -32vw; --y3: -32vh; --r1: -18deg; --r2: 24deg; --r3: -24deg; }
-
-    @media (max-width: 720px) {
-      .intro {
-        top: 22px;
-        left: 18px;
-        right: 18px;
-        max-width: none;
-      }
-
-      .intro p {
-        max-width: 330px;
-      }
-
-      .progress {
-        left: 18px;
-        bottom: 18px;
-      }
-
-      .butterfly {
-        width: calc(var(--size) * 0.76);
-        height: calc(var(--size) * 0.76);
-      }
-    }
-  </style>
+/* Music button */
+#music{position:fixed;right:16px;bottom:16px;z-index:40;width:46px;height:46px;border-radius:50%;border:1px solid var(--gold);background:var(--ink);color:var(--gold);cursor:pointer;font-size:1.2rem;display:none}
+#music.on{display:block}
+#music.spin{animation:sp 6s linear infinite}
+@keyframes sp{to{transform:rotate(360deg)}}
+.toast{position:fixed;left:50%;bottom:28px;transform:translateX(-50%);background:var(--ink);color:#fff;padding:10px 20px;border-radius:99px;font-size:.9rem;z-index:60;opacity:0;pointer-events:none;transition:opacity .3s}
+.toast.show{opacity:1}
+@media(prefers-reduced-motion:reduce){*{animation:none!important;transition-duration:.01s!important}html{scroll-behavior:auto}}
+</style>
 </head>
-<body>
-  <!-- Taruh file musik kamu satu folder dengan HTML ini, lalu ganti src sesuai nama filenya. Contoh: lagu.mp3 -->
-  <audio id="bgMusic" src="lagu.mp3" preload="auto" loop></audio>
+<body class="locked">
 
-  <main class="scene" id="scene">
-    <section class="intro">
-      <div class="label">untuk kamu</div>
-      <h1>maaf ya.</h1>
-      <p>Tekan kupu-kupu putihnya. Pesan dan lagu akan mulai pelan-pelan dari sana.</p>
-      <button id="addBtn">Tambah kupu-kupu</button>
-    </section>
-
-    <div class="butterfly b1"><div class="butterfly-inner"><span class="wing left"></span><span class="wing right"></span><span class="body"></span></div></div>
-    <div class="butterfly b2"><div class="butterfly-inner"><span class="wing left"></span><span class="wing right"></span><span class="body"></span></div></div>
-    <div class="butterfly b3"><div class="butterfly-inner"><span class="wing left"></span><span class="wing right"></span><span class="body"></span></div></div>
-    <div class="butterfly b4"><div class="butterfly-inner"><span class="wing left"></span><span class="wing right"></span><span class="body"></span></div></div>
-    <div class="butterfly b5"><div class="butterfly-inner"><span class="wing left"></span><span class="wing right"></span><span class="body"></span></div></div>
-  </main>
-
-  <div class="progress" id="progress">0 / 8 pesan</div>
-
-  <div class="final" id="final">
-    <div class="final-content">
-      <h2>cuma kamu.</h2>
-      <p>Aku nggak memilih masa lalu. Aku memilih kamu. Maaf kalau caraku menjelaskan bikin kamu sakit hati.</p>
-    </div>
+<!-- COVER -->
+<div id="cover">
+  <div class="door l"></div><div class="door r"></div>
+  <div class="c">
+    <p>Undangan Pernikahan</p>
+    <h1 id="cvNames"></h1>
+    <div class="guest"><small>Kepada Yth. Bapak/Ibu/Saudara/i</small><strong id="guest">Tamu Undangan</strong></div><br>
+    <button class="btn" id="openBtn">Buka Undangan</button>
   </div>
+</div>
 
-  <script>
-    const scene = document.getElementById("scene");
-    const addBtn = document.getElementById("addBtn");
-    const progress = document.getElementById("progress");
-    const final = document.getElementById("final");
-    const bgMusic = document.getElementById("bgMusic");
+<button id="music" aria-label="Putar atau jeda musik">♪</button>
+<audio id="audio" loop preload="none"></audio>
 
-    let musicStarted = false;
+<!-- HERO -->
+<section id="hero"><div class="in">
+  <p class="arab">بِسْمِ اللَّهِ الرَّحْمَٰنِ الرَّحِيمِ</p>
+  <p style="margin-top:18px">Kami menikah</p>
+  <h1 class="names" id="heroNames"></h1>
+  <p id="heroDate"></p>
+  <div class="cd" id="cd" aria-live="off"></div>
+</div></section>
 
-    function playMusic() {
-      if (musicStarted) return;
-      musicStarted = true;
-      bgMusic.volume = 0;
-      bgMusic.play().then(() => {
-        const fade = setInterval(() => {
-          if (bgMusic.volume < 0.45) {
-            bgMusic.volume = Math.min(bgMusic.volume + 0.05, 0.45);
-          } else {
-            clearInterval(fade);
-          }
-        }, 160);
-      }).catch(() => {
-        musicStarted = false;
-      });
-    }
+<!-- AYAT -->
+<section>
+  <h2>Dengan Nama Allah</h2>
+  <p class="lead" id="ayat"></p>
+  <p id="ayatSrc" style="color:var(--gold)"></p>
+</section>
 
-    const messages = [
-      "Maaf kalau omonganku bikin kamu overthinking.",
-      "Aku bukan gamon. Aku cuma salah cara jelasin.",
-      "Aku cerita bukan karena masih berharap sama masa lalu.",
-      "Aku cuma pengen kamu ngerti biar nggak salah paham.",
-      "Fokusku sekarang cuma kamu.",
-      "Nggak ada yang bisa ngalahin kamu di hati aku.",
-      "Aku nggak mau kehilangan kamu.",
-      "Maafin aku ya. Aku sayang kamu, cuma kamu."
-    ];
+<!-- COUPLE -->
+<section class="dark"><div class="in">
+  <h2>Calon Mempelai</h2>
+  <p class="lead">Dengan memohon rahmat dan ridho Allah, kami akan melangsungkan pernikahan putra-putri dari:</p>
+  <div class="pair" id="pair"></div>
+</div></section>
 
-    const extraMessages = [
-      "Cuma kamu.",
-      "Aku pilih kamu.",
-      "Maafin aku ya.",
-      "Aku sayang kamu."
-    ];
+<!-- EVENTS -->
+<section style="max-width:none;background:var(--ink2) var(--star);color:#dfe9e4"><div style="max-width:720px;margin:0 auto">
+  <h2 style="color:#fff">Rangkaian Acara</h2>
+  <div class="ev" id="events"></div>
+</div></section>
 
-    let opened = 0;
+<!-- GIFT -->
+<section>
+  <h2>Amplop Digital</h2>
+  <p class="lead">Kehadiran dan doa Anda sudah cukup bagi kami. Jika ingin berbagi kebahagiaan, Anda dapat mengirimnya melalui:</p>
+  <div class="gifts" id="gifts"></div>
+</section>
 
-    function showMessage(x, y, text) {
-      const el = document.createElement("div");
-      el.className = "message";
-      el.textContent = text;
-      el.style.left = x + "px";
-      el.style.top = y + "px";
-      document.body.appendChild(el);
-      setTimeout(() => el.remove(), 3200);
-    }
+<!-- RSVP -->
+<section style="padding-top:0">
+  <h2>Konfirmasi &amp; Ucapan</h2>
+  <p class="lead">Mohon konfirmasi kehadiran dan tinggalkan doa untuk kami.</p>
+  <form id="rsvp">
+    <label>Nama<input id="fName" required maxlength="60"></label>
+    <label>Kehadiran
+      <select id="fStatus"><option>Hadir</option><option>Tidak hadir</option><option>Masih ragu</option></select>
+    </label>
+    <label>Jumlah tamu<input id="fCount" type="number" min="1" max="10" value="1"></label>
+    <label>Ucapan &amp; doa<textarea id="fMsg" maxlength="300"></textarea></label>
+    <button class="btn" type="submit">Kirim via WhatsApp</button>
+  </form>
+  <div class="wishes" id="wishes"></div>
+</section>
 
-    function showHearts(x, y) {
-      for (let i = 0; i < 5; i++) {
-        setTimeout(() => {
-          const heart = document.createElement("div");
-          heart.className = "heart";
-          heart.textContent = "♥";
-          heart.style.left = (x + Math.random() * 70 - 35) + "px";
-          heart.style.top = (y + Math.random() * 24 - 12) + "px";
-          document.body.appendChild(heart);
-          setTimeout(() => heart.remove(), 2200);
-        }, i * 90);
-      }
-    }
+<footer>
+  <p>Merupakan suatu kehormatan bagi kami apabila Bapak/Ibu/Saudara/i berkenan hadir dan memberikan doa restu.</p><br>
+  <h3 id="ftNames"></h3>
+  <p>Wassalamu’alaikum Warahmatullahi Wabarakatuh</p>
+</footer>
+<div class="toast" id="toast"></div>
 
-    function butterflyClick(event) {
-      event.stopPropagation();
-      playMusic();
+<script>
+/* ====== EDIT DATA DI SINI ====== */
+const C = {
+  groom: { nick:'Akbar', full:'Akbar Setyawan', parents:'Putra dari Bapak … & Ibu …', photo:'Sundanese Groom in Traditional Attire.png' },
+  bride: { nick:'Bunga', full:'Bunga …',        parents:'Putri dari Bapak … & Ibu …', photo:'Sundanese Bridal Elegance in White.png' },
+  // Format tanggal: ISO dengan zona waktu WIB (+07:00)
+  date: '2027-02-14T08:00:00+07:00',
+  events: [
+    { title:'Akad Nikah', day:'Minggu, 14 Februari 2027', time:'08.00 – 10.00 WIB', place:'Nama Tempat', addr:'Alamat lengkap, Tangerang', map:'https://maps.google.com' },
+    { title:'Resepsi',    day:'Minggu, 14 Februari 2027', time:'11.00 – 14.00 WIB', place:'Nama Tempat', addr:'Alamat lengkap, Tangerang', map:'https://maps.google.com' }
+  ],
+  gifts: [
+    { bank:'Bank BCA', no:'1234567890', name:'a.n. Akbar Setyawan' },
+    { bank:'Bank Mandiri', no:'0987654321', name:'a.n. Bunga …' }
+  ],
+  whatsapp: '6281234567890',   // nomor WA penerima konfirmasi (tanpa +)
+  music: 'lagu.mp3',            // lagu diputar saat undangan dibuka
+  ayat: 'Di antara tanda-tanda kebesaran-Nya, Allah menciptakan pasangan untukmu dari dirimu sendiri agar kamu merasa tenteram, dan menanamkan di antara kalian rasa kasih dan sayang.',
+  ayatSrc: 'QS. Ar-Rum: 21'
+};
+/* ================================ */
 
-      const text = opened < messages.length
-        ? messages[opened]
-        : extraMessages[Math.floor(Math.random() * extraMessages.length)];
+const $ = id => document.getElementById(id);
+const esc = s => s.replace(/[&<>"']/g, m => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[m]));
+const both = `${C.groom.nick} & ${C.bride.nick}`;
+document.title = `Undangan Pernikahan ${both}`;
+$('cvNames').innerHTML = `${esc(C.groom.nick)}<span>&amp;</span>${esc(C.bride.nick)}`;
+$('heroNames').innerHTML = `${esc(C.groom.nick)}<i>&amp;</i>${esc(C.bride.nick)}`;
+$('ftNames').textContent = both;
+$('ayat').textContent = C.ayat; $('ayatSrc').textContent = C.ayatSrc;
+const D = new Date(C.date);
+$('heroDate').textContent = D.toLocaleDateString('id-ID',{weekday:'long',day:'numeric',month:'long',year:'numeric',timeZone:'Asia/Jakarta'});
 
-      showMessage(event.clientX, event.clientY, text);
-      showHearts(event.clientX, event.clientY);
+// Nama tamu dari URL: ?to=Nama+Tamu
+const to = new URLSearchParams(location.search).get('to');
+if (to) $('guest').textContent = to;
 
-      if (opened < messages.length) {
-        opened++;
-        progress.textContent = `${opened} / ${messages.length} pesan`;
-      }
+// Mempelai
+$('pair').innerHTML = [C.groom, C.bride].map(p => `
+  <div><div class="photo">${p.photo ? `<img src="${esc(p.photo)}" alt="${esc(p.nick)}">` : esc(p.nick[0])}</div>
+  <h3>${esc(p.full)}</h3><p>${esc(p.parents)}</p></div>`).join('');
 
-      if (opened === messages.length) {
-        setTimeout(() => {
-          final.classList.add("show");
-          setTimeout(() => final.classList.remove("show"), 4200);
-        }, 400);
-      }
-    }
+// Acara
+$('events').innerHTML = C.events.map(e => `
+  <div class="card"><h3>${esc(e.title)}</h3>
+  <p class="d">${esc(e.day)}</p><p>${esc(e.time)}</p>
+  <p><b>${esc(e.place)}</b><br>${esc(e.addr)}</p>
+  <a class="btn" href="${esc(e.map)}" target="_blank" rel="noopener">Lihat Lokasi</a></div>`).join('');
 
-    function attachButterfly(el) {
-      el.addEventListener("click", butterflyClick);
-    }
+// Amplop digital
+$('gifts').innerHTML = C.gifts.map(g => `
+  <div class="gift"><div><small>${esc(g.bank)} · ${esc(g.name)}</small><b>${esc(g.no)}</b></div>
+  <button class="btn ghost" data-copy="${esc(g.no)}">Salin</button></div>`).join('');
+document.addEventListener('click', e => {
+  const b = e.target.closest('[data-copy]'); if (!b) return;
+  navigator.clipboard?.writeText(b.dataset.copy).then(() => toast('Nomor rekening disalin'));
+});
 
-    function createButterfly(x, y) {
-      const b = document.createElement("div");
-      b.className = "butterfly";
-      const size = Math.floor(Math.random() * 45) + 100;
+// Countdown
+function tick(){
+  let s = Math.max(0, Math.floor((D - Date.now())/1000));
+  const v = [['Hari',86400],['Jam',3600],['Menit',60],['Detik',1]].map(([l,n]) => {
+    const x = Math.floor(s/n); s -= x*n; return `<div><b>${String(x).padStart(2,'0')}</b><span>${l}</span></div>`;
+  });
+  $('cd').innerHTML = v.join('');
+}
+tick(); setInterval(tick, 1000);
 
-      b.style.setProperty("--size", size + "px");
-      b.style.setProperty("--x", x ? x + "px" : Math.floor(Math.random() * 84 + 4) + "vw");
-      b.style.setProperty("--y", y ? y + "px" : Math.floor(Math.random() * 68 + 16) + "vh");
-      b.style.setProperty("--duration", Math.floor(Math.random() * 8 + 13) + "s");
-      b.style.setProperty("--x1", Math.floor(Math.random() * 36 - 18) + "vw");
-      b.style.setProperty("--y1", Math.floor(Math.random() * 36 - 22) + "vh");
-      b.style.setProperty("--x2", Math.floor(Math.random() * 70 - 35) + "vw");
-      b.style.setProperty("--y2", Math.floor(Math.random() * 56 - 28) + "vh");
-      b.style.setProperty("--x3", Math.floor(Math.random() * 64 - 32) + "vw");
-      b.style.setProperty("--y3", Math.floor(Math.random() * 52 - 26) + "vh");
-      b.style.setProperty("--r1", "20deg");
-      b.style.setProperty("--r2", "-24deg");
-      b.style.setProperty("--r3", "18deg");
+// Buka undangan + musik
+const audio = $('audio'), mbtn = $('music');
+$('openBtn').onclick = () => {
+  $('cover').classList.add('open'); document.body.classList.remove('locked'); scrollTo(0,0);
+  if (C.music) { audio.src = C.music; mbtn.classList.add('on'); audio.play().then(() => mbtn.classList.add('spin')).catch(()=>{}); }
+};
+mbtn.onclick = () => {
+  if (audio.paused) { audio.play(); mbtn.classList.add('spin'); } else { audio.pause(); mbtn.classList.remove('spin'); }
+};
 
-      b.innerHTML = `<div class="butterfly-inner"><span class="wing left"></span><span class="wing right"></span><span class="body"></span></div>`;
-      scene.appendChild(b);
-      attachButterfly(b);
-      setTimeout(() => b.remove(), 28000);
-    }
+// Ucapan (disimpan di browser ini saja) + kirim ke WhatsApp
+const KEY = 'wishes-' + both;
+const load = () => { try { return JSON.parse(localStorage.getItem(KEY)) || []; } catch { return []; } };
+function render(){
+  $('wishes').innerHTML = load().map(w => `<div class="wish"><b>${esc(w.n)}</b><small>${esc(w.s)}</small><p>${esc(w.m)}</p></div>`).join('');
+}
+$('rsvp').addEventListener('submit', e => {
+  e.preventDefault();
+  const w = { n:$('fName').value.trim(), s:$('fStatus').value, c:$('fCount').value, m:$('fMsg').value.trim() };
+  try { localStorage.setItem(KEY, JSON.stringify([w, ...load()].slice(0,50))); } catch {}
+  render();
+  const text = `Assalamu’alaikum, saya ${w.n}.\nKonfirmasi: ${w.s} (${w.c} orang)\nUcapan: ${w.m || '-'}`;
+  window.open(`https://wa.me/${C.whatsapp}?text=${encodeURIComponent(text)}`, '_blank');
+  e.target.reset(); toast('Terima kasih atas konfirmasinya');
+});
+render();
 
-    document.querySelectorAll(".butterfly").forEach(attachButterfly);
-
-    addBtn.addEventListener("click", (event) => {
-      event.stopPropagation();
-      for (let i = 0; i < 3; i++) {
-        setTimeout(() => createButterfly(), i * 180);
-      }
-    });
-
-    scene.addEventListener("click", (event) => {
-      if (event.target.closest("button") || event.target.closest(".butterfly")) return;
-      createButterfly(event.clientX, event.clientY);
-    });
-  </script>
+let tt; function toast(m){ const t=$('toast'); t.textContent=m; t.classList.add('show'); clearTimeout(tt); tt=setTimeout(()=>t.classList.remove('show'),2200); }
+</script>
 </body>
 </html>
